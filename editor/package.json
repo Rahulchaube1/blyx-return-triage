@@ -2,7 +2,7 @@
   "name": "blyx-return-triage",
   "displayName": "Return Triage for Blyx",
   "publisher": "RahulChaube",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Route inspected returns to stock, repair, or disposal while preserving the return authorization ID.",
   "license": "MIT",
   "engines": {

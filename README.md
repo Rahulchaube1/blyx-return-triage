@@ -1,10 +1,12 @@
 # Return Triage
 
-![Package logo](vendor/return_triage/assets/logo.png)
+![Black skimmer](vendor/return_triage/assets/logo.png)
 
 Route inspected returns to stock, repair, or disposal while preserving the return authorization ID.
 
-Commerce and fulfillment · framework · 0.1.1
+Commerce and fulfillment · framework · 0.1.2
+
+Framework bird: Black skimmer.
 
 ## Drive the workflow
 
@@ -38,10 +40,10 @@ Run `blyxc native-run main.blyx` to reproduce `expected.txt`. Run `blyxc native-
 ## Try the published project
 
 ```sh
-nest demo return_triage@0.1.1
+nest demo return_triage@0.1.2
 blyxc native-run return_triage-demo/main.blyx
 ```
 
-Install with `nest add return_triage@0.1.1` and import `vendor::return_triage::return_triage`.
+Install with `nest add return_triage@0.1.2` and import `vendor::return_triage::return_triage`.
 
 Maintained by Rahul Chaube. [Blyx](https://www.blyx-lang.space) · [GitHub](https://github.com/Rahulchaube1) · [LinkedIn](https://www.linkedin.com/in/rahulchaube1) · [Sponsor](https://github.com/sponsors/Rahulchaube1)
