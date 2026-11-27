@@ -1,0 +1,37 @@
+use std::cli;
+use vendor::return_triage::return_triage;
+
+fn main() {
+    let mut state = return_triage_start();
+    state = return_triage_step(state, "authorize", 9.0);
+    println!(return_triage_command(state));
+    state = return_triage_step(state, "receive", 8.0);
+    println!(return_triage_command(state));
+    state = return_triage_step(state, "receive", 9.0);
+    println!(return_triage_command(state));
+    state = return_triage_step(state, "grade", 1.0);
+    println!(return_triage_command(state));
+    state = return_triage_step(state, "complete", 9.0);
+    println!(return_triage_command(state));
+    println!(len(return_triage_step([], "bad", 0.0)));
+    println!(return_triage_command(return_triage_step(return_triage_start(), "unrecognized", 0.0)));
+    println!(len(return_triage_replay(args_new(), [1])));
+    let mut events = args_new();
+    events = args_push(events, "authorize");
+    events = args_push(events, "receive");
+    events = args_push(events, "grade");
+    events = args_push(events, "complete");
+    println!(return_triage_command(return_triage_replay(events, [9, 9, 1, 9])));
+    let branch_0 = return_triage_step([0, 0, 0], "authorize", 1.0);
+    println!(at(branch_0, 0) == 1.0 && at(branch_0, 1) == 1.0 && return_triage_command(branch_0) == "send_label");
+    let branch_1 = return_triage_step([1, 0, 0], "receive", 0.0);
+    println!(at(branch_1, 0) == 2.0 && at(branch_1, 1) == 0.0 && return_triage_command(branch_1) == "quarantine");
+    let branch_2 = return_triage_step([2, 0, 0], "grade", 0.0);
+    println!(at(branch_2, 0) == 3.0 && at(branch_2, 1) == 0.0 && return_triage_command(branch_2) == "restock");
+    let branch_3 = return_triage_step([2, 0, 0], "grade", 1.0);
+    println!(at(branch_3, 0) == 4.0 && at(branch_3, 1) == 0.0 && return_triage_command(branch_3) == "request_repair");
+    let branch_4 = return_triage_step([2, 0, 0], "grade", 2.0);
+    println!(at(branch_4, 0) == 3.0 && at(branch_4, 1) == 0.0 && return_triage_command(branch_4) == "recycle");
+    let branch_5 = return_triage_step([4, 0, 0], "complete", 0.0);
+    println!(at(branch_5, 0) == 3.0 && at(branch_5, 1) == 0.0 && return_triage_command(branch_5) == "restock");
+}

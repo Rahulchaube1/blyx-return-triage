@@ -1,0 +1,28 @@
+{
+  "name": "blyx-return-triage",
+  "displayName": "Return Triage for Blyx",
+  "publisher": "RahulChaube",
+  "version": "0.1.1",
+  "description": "Route inspected returns to stock, repair, or disposal while preserving the return authorization ID.",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "icon": "icon.png",
+  "homepage": "https://nest.blyx-lang.space/packages/return_triage.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rahulchaube1/blyx-return-triage.git"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "blyx",
+        "path": "./snippets.json"
+      }
+    ]
+  }
+}

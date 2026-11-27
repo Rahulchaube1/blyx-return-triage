@@ -1,0 +1,69 @@
+// Route inspected returns to stock, repair, or disposal while preserving the return authorization ID.
+use std::cli;
+
+pub fn return_triage_start() -> vector { [0, 0, 0] }
+
+pub fn return_triage_step(snapshot: vector, event: str, value: f64) -> vector {
+    if len(snapshot) != 3 { return []; }
+    let phase = at(snapshot, 0);
+    let saved = at(snapshot, 1);
+    let previous = at(snapshot, 2);
+    if !(phase >= 0.0 && phase < 5.0 && phase % 1.0 == 0.0 && previous >= 0.0 && previous < 6.0 && previous % 1.0 == 0.0 && saved >= 0.0 && saved <= 9007199254740991.0 && saved % 1.0 == 0.0) { return []; }
+    if !(value >= 0.0 && value <= 1000000000.0 && value % 1.0 == 0.0) { return [phase, saved, 0]; }
+    // idle
+    if phase == 0.0 {
+        if event == "authorize" && value>0.0 {
+            return [1, value, 1]; // send_label
+        }
+    }
+    // transit
+    if phase == 1.0 {
+        if event == "receive" && value==saved {
+            return [2, saved, 2]; // quarantine
+        }
+    }
+    // inspect
+    if phase == 2.0 {
+        if event == "grade" && value==0.0 {
+            return [3, saved, 3]; // restock
+        }
+        if event == "grade" && value==1.0 {
+            return [4, saved, 4]; // request_repair
+        }
+        if event == "grade" && value==2.0 {
+            return [3, saved, 5]; // recycle
+        }
+    }
+    // repair
+    if phase == 4.0 {
+        if event == "complete" && value==saved {
+            return [3, saved, 3]; // restock
+        }
+    }
+    [phase, saved, 0]
+}
+
+pub fn return_triage_command(snapshot: vector) -> str {
+    if len(snapshot) != 3 { return "invalid"; }
+    let action = at(snapshot, 2);
+    if action == 0.0 { return "reject"; }
+    if action == 1.0 { return "send_label"; }
+    if action == 2.0 { return "quarantine"; }
+    if action == 3.0 { return "restock"; }
+    if action == 4.0 { return "request_repair"; }
+    if action == 5.0 { return "recycle"; }
+    "invalid"
+}
+
+// Stop at the first rejected event. No host effects run during replay.
+pub fn return_triage_replay(events: arglist, values: vector) -> vector {
+    if args_len(events) != len(values) { return []; }
+    let mut state = return_triage_start();
+    let mut i = 0;
+    while i < len(values) {
+        state = return_triage_step(state, args_at(events, i), at(values, i));
+        if at(state, 2) == 0.0 { return []; }
+        i += 1;
+    }
+    state
+}

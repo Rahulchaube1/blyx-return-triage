@@ -1,0 +1,27 @@
+{
+  "return_triage_start": {
+    "prefix": "return_triage_start",
+    "body": "return_triage_start()",
+    "description": "Return Triage \u00b7 Route inspected returns to stock, repair, or disposal while preserving the return authorization ID."
+  },
+  "return_triage_step": {
+    "prefix": "return_triage_step",
+    "body": "return_triage_step(${1:snapshot}, ${2:event}, ${3:value})",
+    "description": "Return Triage \u00b7 Route inspected returns to stock, repair, or disposal while preserving the return authorization ID."
+  },
+  "return_triage_command": {
+    "prefix": "return_triage_command",
+    "body": "return_triage_command(${1:snapshot})",
+    "description": "Return Triage \u00b7 Route inspected returns to stock, repair, or disposal while preserving the return authorization ID."
+  },
+  "return_triage_replay": {
+    "prefix": "return_triage_replay",
+    "body": "return_triage_replay(${1:events}, ${2:values})",
+    "description": "Return Triage \u00b7 Route inspected returns to stock, repair, or disposal while preserving the return authorization ID."
+  },
+  "Import return_triage": {
+    "prefix": "use_return_triage",
+    "body": "use vendor::return_triage::return_triage;",
+    "description": "Import the installed Return Triage module"
+  }
+}
